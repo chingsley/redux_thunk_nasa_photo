@@ -11,7 +11,7 @@ export const getPhoto = (date) => async (dispatch) => {
     const response = await axios.get(
       `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`
     );
-    console.log('response = ', response);
+    // console.log('response = ', response);
     const { data } = response;
     dispatch({ type: FETCH_PHOTO_SUCCESS, payload: data });
   } catch (err) {

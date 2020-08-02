@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
-import { getPhoto } from '../actions';
+import { getPhoto } from '../store/actions';
 
 class NASAPhoto extends React.Component {
   state = {
@@ -28,10 +28,11 @@ class NASAPhoto extends React.Component {
     this.props.getPhoto(moment().format('YYYY-MM-DD'));
   };
 
-  findByDate = (e) => {
+  getPhotoByDate = (e) => {
     e.preventDefault();
-    this.setState({ imgLoaded: false, date: e.target.value });
-    this.props.getPhoto(this.state.date);
+    const selectedDate = e.target.value;
+    this.setState({ imgLoaded: false, date: selectedDate });
+    this.props.getPhoto(selectedDate);
   };
 
   render() {
@@ -50,7 +51,7 @@ class NASAPhoto extends React.Component {
             type="date"
             value={this.state.date}
             // onChange={({ target: { value } }) => this.setDate(value)}
-            onChange={this.findByDate}
+            onChange={this.getPhotoByDate}
             placeholder="Select Date"
             min="2000-01-01"
             max={moment().format('YYYY-MM-DD')}
